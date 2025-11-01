@@ -1,0 +1,30 @@
+{
+  "name": "swift-doc",
+  "version": "1.0.0",
+  "description": "An AI agent built using Mastra and TypeScript that fetches the documentation snippet of user's code request.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "mastra dev",
+    "build": "mastra build"
+  },
+  "keywords": [
+    "mastra ai",
+    "ai agent",
+    "typescript"
+  ],
+  "author": "Paul Ajijola",
+  "license": "MIT",
+  "packageManager": "pnpm@10.14.0",
+  "devDependencies": {
+    "@mastra/libsql": "^0.16.1",
+    "@mastra/loggers": "^0.10.18",
+    "@mastra/memory": "^0.15.10",
+    "@types/node": "^24.9.2",
+    "mastra": "^0.17.7",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@mastra/core": "^0.23.3",
+    "zod": "^4.1.12"
+  }
+}
