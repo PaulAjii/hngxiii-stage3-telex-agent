@@ -1,6 +1,13 @@
 import { Agent } from "@mastra/core/agent";
 import { Memory } from "@mastra/memory";
 import { LibSQLStore } from "@mastra/libsql";
+import {
+  getCachedAnswerTool,
+  searchWebForContextTool,
+  synthesizeAnswerTool,
+  addToCacheTool,
+  createCodeImageTool,
+} from "../tools";
 
 export const swiftDoc = new Agent({
   name: "Swift Documentation",
@@ -70,17 +77,17 @@ You are **Synapse**, an expert AI technical assistant and programming partner. Y
 
 Remember: Your goal is to accelerate developer productivity by providing fast, accurate, and well-sourced answers to their technical problems.
   `,
-  model: 'zhipuai-coding-plan/glm-4.6'
+  model: "zhipuai-coding-plan/glm-4.6",
   tools: {
     getCachedAnswerTool,
     searchWebForContextTool,
     synthesizeAnswerTool,
     addToCacheTool,
-    createCodeImageTool
+    createCodeImageTool,
   },
   memory: new Memory({
     storage: new LibSQLStore({
-        url: 'file:../swiftdoc.db'
-    })
-  })
+      url: "file:../swiftdoc.db",
+    }),
+  }),
 });
