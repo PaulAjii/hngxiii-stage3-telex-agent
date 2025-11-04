@@ -95,7 +95,7 @@ Here is a brief overview of the core files and directories:
 
 - _src/mastra/utils/embedding-util.ts_: Helper functions to create embeddings for queries and context chunks using Google's text-embedding-004.
 
-- _src/mastra/routes/a2a.route.ts_: Defines the public-facing /a2a/agent/:agentId route that allows external services (like Telex.im) to communicate with the agent.
+- _src/mastra/routes/a2a.route.ts_: Defines the public-facing /a2a/agent/:agentId route that allows external services (like [Telex](https://telex.im/docs)) to communicate with the agent.
 
 ### Folder Structure
 
