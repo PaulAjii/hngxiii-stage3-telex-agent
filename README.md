@@ -168,4 +168,4 @@ You can run the agent locally using:
 pnpm dev
 ```
 
-This will start the server (typically on http://localhost:4111) and expose the A2A (Agent-to-Agent) route at /a2a/agent/swiftDoc for integration.
+This will start the server (typically on http://localhost:4111) and expose the A2A (Agent-to-Agent) route at `/a2a/agent/swiftDoc` for integration.
