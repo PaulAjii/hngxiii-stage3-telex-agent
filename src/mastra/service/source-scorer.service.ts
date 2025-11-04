@@ -9,6 +9,7 @@ const TOP_TIER_DOMAINS = new Set([
   "vuejs.org",
   "angular.io",
   "typescriptlang.org",
+  "mastra.ai",
 ]);
 
 const DOCS_PATTERNS = [
