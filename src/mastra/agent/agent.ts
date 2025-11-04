@@ -6,7 +6,7 @@ import {
   searchWebForContextTool,
   synthesizeAnswerTool,
   addToCacheTool,
-  createCodeImageTool,
+  // createCodeImageTool,
 } from "../tools";
 
 export const swiftDoc = new Agent({
@@ -83,7 +83,7 @@ Remember: Your goal is to accelerate developer productivity by providing fast, a
     searchWebForContextTool,
     synthesizeAnswerTool,
     addToCacheTool,
-    createCodeImageTool,
+    // createCodeImageTool,
   },
   memory: new Memory({
     storage: new LibSQLStore({
