@@ -2,7 +2,7 @@
 
 Synapse is an expert AI technical assistant and programming partner built on the Mastra framework. It's designed to provide accurate, fast, and relevant answers to complex technical questions by grounding all its responses in real-time information from official documentation and technical blogs.
 
-## Unlike a standard chatbot, Synapse is a true Dynamic Retrieval-Augmented Generation (RAG) agent. It doesn't just guess answers; it finds them.
+Unlike a standard chatbot, Synapse is a true Dynamic Retrieval-Augmented Generation (RAG) agent. It doesn't just guess answers; it finds them.
 
 ## Core Features
 
@@ -14,7 +14,9 @@ Synapse is an expert AI technical assistant and programming partner built on the
 
 - Resilient & Concurrent Scraping: Uses axios-retry and p-limit to robustly scrape multiple web pages at once, handling timeouts and errors gracefully.
 
-## \_ Mastra-Native Tooling: The entire complex workflow is orchestrated as a series of modular, pluggable tools (getCachedAnswerTool, searchWebForContextTool, etc.) for the Mastra agent to use.
+- Mastra-Native Tooling: The entire complex workflow is orchestrated as a series of modular, pluggable tools (getCachedAnswerTool, searchWebForContextTool, etc.) for the Mastra agent to use.
+
+---
 
 ## How It Works: The Agent's "Brain"
 
@@ -97,7 +99,7 @@ Here is a brief overview of the core files and directories:
 
 ### Folder Structure
 
-```
+```bash
 src/
 └── mastra/
 ├── index.ts # Main Mastra app entry point
