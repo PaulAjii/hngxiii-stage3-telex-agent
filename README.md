@@ -40,7 +40,7 @@ Synapse's logic follows a precise, multi-step workflow on every query:
 
 ## Core Technology Stack
 
-1. AI Framework: Mastra (@mastra/core)
+1. AI Framework: Mastra["https://mastra.ai"] (@mastra/core)
 
 2. Agent LLM: Z AI (zhipuai-coding-plan/glm-4.6)
 
