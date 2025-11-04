@@ -97,6 +97,7 @@ Here is a brief overview of the core files and directories:
 
 ### Folder Structure
 
+```
 src/
 └── mastra/
 ├── index.ts # Main Mastra app entry point
@@ -124,23 +125,24 @@ src/
 │ └── synthesize-answer.ts
 └── utils/
 └── embedding-util.ts # Embedding helper functions
+```
 
-Setup & Configuration
+## Setup & Configuration
 
-Clone the repository:
+1. Clone the repository:
 
 ```bash
 git clone [YOUR_REPO_URL]
 cd [YOUR_PROJECT_DIRECTORY]
 ```
 
-Install dependencies:
+2. Install dependencies:
 
 ```bash
 pnpm install
 ```
 
-Create a .env file in the root and add the following environment variables:
+3. Create a .env file in the root and add the following environment variables:
 
 ```bash
 # Mastra & Z AI
@@ -157,9 +159,9 @@ GOOGLE_SEARCH_API_KEY=AIzaSyxxxxxxxxxxxxxxxxxxx
 GOOGLE_SEARCH_ENGINE_ID=xxxxxxxxxxxxxxxxxxxx
 ```
 
-Running the Project
+4. Running the Project
 
-You can run the agent locally using the Mastra CLI:
+You can run the agent locally using:
 
 ```bash
 # Start the Mastra development server
