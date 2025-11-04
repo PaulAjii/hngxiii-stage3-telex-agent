@@ -16,6 +16,9 @@ export const mastra = new Mastra({
       enabled: true,
     },
   },
+  bundler: {
+    externals: ["axios"],
+  },
   server: {
     build: {
       openAPIDocs: true,

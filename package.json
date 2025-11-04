@@ -20,6 +20,7 @@
     "@mastra/loggers": "^0.10.18",
     "@mastra/memory": "^0.15.10",
     "@types/node": "^24.9.2",
+    "dokugen": "^3.9.0",
     "mastra": "^0.17.7",
     "typescript": "^5.9.3"
   },
