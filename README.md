@@ -38,26 +38,26 @@ Synapse's logic follows a precise, multi-step workflow on every query:
 
 - Non-Blocking Cache: After the response is sent, addToCacheTool runs in the background to embed and save the new context to Pinecone for future use.
 
-[!NOTE]
-Image creation of code snippet to be created later.
+> [!NOTE]
+> Image creation of code snippet to be created later.
 
 ## Core Technology Stack
 
-1. AI Framework: (Mastra)[https://mastra.ai/docs] (@mastra/core)
+1. AI Framework: [Mastra](https://mastra.ai/docs) (@mastra/core)
 
-2. Agent LLM: (Z AI (zhipuai-coding-plan/glm-4.6))[https://docs.z.ai]
+2. Agent LLM: [Z AI (zhipuai-coding-plan/glm-4.6)](https://docs.z.ai)
 
-3. Embedding Model: Google (google/text-embedding-004)
+3. Embedding Model: Google [google/text-embedding-004]
 
-4. Vector Database: (Pinecone)[https://app.pinecone.io]
+4. Vector Database: [Pinecone](https://app.pinecone.io)
 
-5. Chat Memory: LibSQL (@mastra/libsql)
+5. Chat Memory: LibSQL [@mastra/libsql]
 
 6. Web Search: Google Custom Search JSON API
 
 7. Web Scraping: axios, cheerio, p-limit, axios-retry
 
-8. Language & Runtime: (TypeScript)[https://www.typescriptlang.org]
+8. Language & Runtime: [TypeScript](https://www.typescriptlang.org)
 
 9. Package Manager: pnpm
 
