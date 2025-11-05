@@ -115,7 +115,7 @@ export const a2aAgentRoute = registerApiRoute("/a2a/agent/:agentId", {
             message: {
               messageId: randomUUID(),
               role: "agent",
-              parts: [{ kind: "text", text: agentText }],
+              parts: [{ kind: "text", text: artifacts[0].parts[0].text }],
               kind: "message",
             },
           },

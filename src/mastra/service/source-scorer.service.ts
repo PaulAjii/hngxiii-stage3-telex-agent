@@ -13,6 +13,7 @@ const TOP_TIER_DOMAINS = new Set([
 ]);
 
 const DOCS_PATTERNS = [
+  /docs/,
   /docs\./,
   /documentation\./,
   /api\./,
@@ -50,11 +51,7 @@ export class SourceScorerService {
 
     scoredResults.sort((a, b) => b.score - a.score);
 
-    console.log(
-      `[SourceScorer] Ranked results: ${JSON.stringify(
-        scoredResults.map((r) => ({ url: r.link, score: r.score }))
-      )}`
-    );
+    console.log(`[SourceScorer] Ranked results`);
     return scoredResults;
   }
 
