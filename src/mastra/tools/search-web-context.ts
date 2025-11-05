@@ -55,7 +55,7 @@ ${page.content}
 ---[END CONTEXT ${index + 1}]---
         `;
         })
-        .join("\n\n");
+        .join("\n");
       console.log(
         `Successfully generated context string of ${contextString.length} chars.`
       );
