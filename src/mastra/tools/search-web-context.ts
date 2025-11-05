@@ -16,7 +16,7 @@ export const searchWebForContextTool = createTool({
   }),
   execute: async ({ context }) => {
     try {
-      const results = await searchService.search(context.query, 10);
+      const results = await searchService.search(context.query, 5);
 
       if (!results || results.length === 0) {
         console.log(`No results found for query: ${context.query}`);
@@ -24,7 +24,7 @@ export const searchWebForContextTool = createTool({
       }
 
       const reankedResults = sourceScorerService.rankResults(results);
-      const topResults = reankedResults.slice(0, 5);
+      const topResults = reankedResults.slice(0, 3);
 
       console.log(
         `Top 3 ranked results to scrape: ${topResults
