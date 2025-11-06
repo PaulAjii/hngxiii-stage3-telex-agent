@@ -12,14 +12,21 @@ const TOP_TIER_DOMAINS = new Set([
   "mastra.ai",
 ]);
 
-const DOCS_PATTERNS = [
-  /docs/,
-  /docs\./,
-  /documentation\./,
-  /api\./,
-  /developer\./,
-  /guide\./,
-  /spec\./,
+const DOCS_SUBDOMAIN_PATTERNS = [
+  /^docs\./,
+  /^documentation\./,
+  /^api\./,
+  /^developer\./,
+  /^guide\./,
+  /^spec\./,
+];
+
+const DOCS_PATH_PATTERNS = [
+  /^\/docs/,
+  /^\/documentation/,
+  /^\/api/,
+  /^\/guides/,
+  /^\/spec/,
 ];
 
 const COMMUNITY_SITES = new Set(["stackoverflow.com", "stackexchange.com"]);
@@ -55,38 +62,53 @@ export class SourceScorerService {
     return scoredResults;
   }
 
+  private isDomainOrSubdomain(
+    hostname: string,
+    domainSet: Set<string>
+  ): boolean {
+    if (domainSet.has(hostname)) {
+      return true;
+    }
+
+    for (const domain of domainSet) {
+      if (hostname.endsWith(`${domain}`)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   private scoreUrl(url: string): {
     score: number;
     priority: RankedSearchResult["priority"];
   } {
     try {
-      const { hostname } = new URL(url);
+      const { hostname, pathname } = new URL(url);
       if (TOP_TIER_DOMAINS.has(hostname)) {
         return { score: 100, priority: "TOP" };
       }
 
-      if (DOCS_PATTERNS.some((pattern) => pattern.test(hostname))) {
+      if (
+        DOCS_SUBDOMAIN_PATTERNS.some((pattern) => pattern.test(hostname)) ||
+        DOCS_PATH_PATTERNS.some((pattern) => pattern.test(pathname))
+      ) {
         return { score: 75, priority: "DOCS" };
       }
 
-      if (
-        COMMUNITY_SITES.has(hostname) ||
-        [...COMMUNITY_SITES].some((d) => hostname.endsWith(`.${d}`))
-      ) {
+      if (this.isDomainOrSubdomain(hostname, COMMUNITY_SITES)) {
         return { score: 50, priority: "COMMUNITY" };
       }
 
-      if (
-        BLOG_PLATFORMS.has(hostname) ||
-        [...BLOG_PLATFORMS].some((d) => hostname.endsWith(`.${d}`))
-      ) {
+      if (this.isDomainOrSubdomain(hostname, BLOG_PLATFORMS)) {
         return { score: 25, priority: "BLOG" };
       }
 
       return { score: 10, priority: "OTHER" };
     } catch (error) {
-      console.log(error);
-      return { score: 0, priority: "OTHER" }; // Penalize bad URLs
+      console.log(
+        `Failed to parse URL: ${url}. Returning score: 0 and priority: OTHER`
+      );
+      return { score: 0, priority: "OTHER" };
     }
   }
 }
