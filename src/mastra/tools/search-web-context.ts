@@ -62,7 +62,7 @@ ${page.content}
 
       return { output: contextString };
     } catch (error) {
-      console.log(`Critical error: ${error}`);
+      console.log(`Critical error: ${error.message}`);
       return { output: "There was an error processing your request" };
     }
   },
