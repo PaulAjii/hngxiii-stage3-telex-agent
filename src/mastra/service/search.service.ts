@@ -15,11 +15,11 @@ class GoogleSearch implements ISearchService {
     this.searchEngineId = process.env.GOOGLE_SEARCH_ENGINE_ID || "";
     this.client = axios.create({
       baseURL: googleSearchApiUrl,
-      timeout: 3000,
+      timeout: 2000,
     });
 
     axiosRetry(this.client, {
-      retries: 3,
+      retries: 1,
       retryDelay: axiosRetry.exponentialDelay,
       retryCondition: (error) => {
         return (

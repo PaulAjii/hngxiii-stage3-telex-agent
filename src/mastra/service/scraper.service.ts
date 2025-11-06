@@ -12,7 +12,7 @@ class WebScraper implements IScraperService {
 
   constructor(concurrency: number = 3) {
     this.client = axios.create({
-      timeout: 8000,
+      timeout: 5000,
       headers: {
         "User-Agent":
           "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
@@ -20,7 +20,7 @@ class WebScraper implements IScraperService {
     });
 
     axiosRetry(this.client, {
-      retries: 2,
+      retries: 1,
       retryDelay: axiosRetry.exponentialDelay,
       retryCondition: (error) => {
         return (
@@ -60,7 +60,7 @@ class WebScraper implements IScraperService {
         }
       });
 
-      const cleanText = textChunks.join("\n\n");
+      const cleanText = textChunks.join("\n");
 
       const title = $("h1").first().text().trim() || url.title;
 

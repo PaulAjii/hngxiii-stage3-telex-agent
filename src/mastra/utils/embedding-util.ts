@@ -1,12 +1,9 @@
-import { ModelRouterEmbeddingModel } from "@mastra/core";
 import { embed, embedMany } from "ai";
+import { google } from "@ai-sdk/google";
 import { MDocument } from "@mastra/rag";
 
+const googleEmbedding = google.textEmbeddingModel("text-embedding-004");
 export const createMultipleEmbeddings = async (fileToEmbed: string) => {
-  const embeddingModel = new ModelRouterEmbeddingModel(
-    "google/text-embedding-004"
-  );
-
   // Create MD Document for processing
   const doc = MDocument.fromText(fileToEmbed);
 
@@ -19,7 +16,7 @@ export const createMultipleEmbeddings = async (fileToEmbed: string) => {
 
   // Create Embeddings
   const { embeddings } = await embedMany({
-    model: embeddingModel,
+    model: googleEmbedding,
     values: chunks.map((c) => c.text),
   });
   const multipleEmbeddings = embeddings;
@@ -28,12 +25,8 @@ export const createMultipleEmbeddings = async (fileToEmbed: string) => {
 };
 
 export const createSingleEmbedding = async (query: string) => {
-  const embeddingModel = new ModelRouterEmbeddingModel(
-    "google/text-embedding-004"
-  );
-
   const { embedding } = await embed({
-    model: embeddingModel,
+    model: googleEmbedding,
     value: query,
   });
 

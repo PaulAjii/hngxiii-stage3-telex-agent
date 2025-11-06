@@ -6,8 +6,9 @@ import { createTool } from "@mastra/core/tools";
 export const scrapeTool = createTool({
   id: "scrape-tool",
   description:
-    "Takes a list of ranked search results, scrapes the top 3, and formats them into a single context string.",
+    "Takes a list of ranked search results, scrapes the top 3, and formats them into a single context string to be sent to the user.",
   inputSchema: z.object({
+    query: z.string(),
     results: z.array(rankedSearchResultSchema),
   }),
   outputSchema: z.object({
@@ -25,13 +26,10 @@ export const scrapeTool = createTool({
       if (!scrapedPages || scrapedPages.length === 0) {
         return { output: "" };
       }
-      const contextString = scrapedPages
-        .map((page, i) => {
-          const originalRank = topResults.find(
-            (r) => r.link === page.sourceURL
-          );
+      const contextString = scrapedPages.map((page, i) => {
+        const originalRank = topResults.find((r) => r.link === page.sourceURL);
 
-          return `
+        return `
 ---- CONTEXT ${i + 1} ----
 SOURCE_PRIORITY_SCORE: ${originalRank?.score || 0}
 SOURCE_PRIORITY: ${originalRank?.priority || "OTHER"}
@@ -40,13 +38,14 @@ SOURCE_TITLE: ${page.title}
 CONTENT: ${page.content}
 ---- END CONTEXT ${i + 1} ----
                 `;
-        })
-        .join("\n");
+      });
 
-      return { output: contextString };
+      return { output: contextString.join("\n") };
     } catch (error) {
       console.log(`Error with scraping: ${error.message}`);
-      return { output: "Error while scraping the search results" };
+      return {
+        output: "Error while scraping the search results",
+      };
     }
   },
 });

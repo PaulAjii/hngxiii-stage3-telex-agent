@@ -19,7 +19,7 @@ export const getCachedAnswerTool = createTool({
     const result = await store.query({
       indexName: "hngindex",
       queryVector: embeddings,
-      topK: 10,
+      topK: 5,
       includeVector: true,
     });
 

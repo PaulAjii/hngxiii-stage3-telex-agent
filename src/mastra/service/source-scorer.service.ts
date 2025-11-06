@@ -10,6 +10,7 @@ const TOP_TIER_DOMAINS = new Set([
   "angular.io",
   "typescriptlang.org",
   "mastra.ai",
+  "telex.im",
 ]);
 
 const DOCS_SUBDOMAIN_PATTERNS = [
@@ -52,6 +53,9 @@ export class SourceScorerService {
 
   public rankResults(results: SearchResultDto[]): RankedSearchResult[] {
     const scoredResults = results.map((result) => {
+      if (!result || !result.link) {
+        return { ...result, score: 0, priority: "OTHER" };
+      }
       const { score, priority } = this.scoreUrl(result.link);
       return { ...result, score, priority };
     });
@@ -71,7 +75,7 @@ export class SourceScorerService {
     }
 
     for (const domain of domainSet) {
-      if (hostname.endsWith(`${domain}`)) {
+      if (hostname.endsWith(`.${domain}`)) {
         return true;
       }
     }

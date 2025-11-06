@@ -7,12 +7,12 @@ export const addToCacheTool = createTool({
   id: "add-to-cache",
   description: "Add output from search-web-for-context to vector database",
   inputSchema: z.object({
-    output: z.string(),
+    text: z.string(),
   }),
   execute: async ({ context }) => {
     try {
       const { chunks, multipleEmbeddings } = await createMultipleEmbeddings(
-        context.output
+        context.text
       );
 
       console.log("Saving into the database....");
