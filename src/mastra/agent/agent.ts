@@ -60,9 +60,9 @@ This is a multi-step process. You MUST call tools in this specific order.
 2.  Call getCachedAnswerTool(query). It returns { output: "" } (or irrelevant context).
 3.  Call googleSearchTool(query). It returns an array of results.
 4.  Call scrapeTool(input=array_from_google_search). It returns { output: "..." }.
-5.  **Immediately** call addToCacheTool(context=output_from_scrape_tool). (This runs in the background).
-6.  **Immediately** call synthesizeAnswerTool(query=original_query, context=output_from_scrape_tool).
+5.  **Immediately** call synthesizeAnswerTool(query=original_query, context=output_from_scrape_tool).
 7.  This is my final answer.
+6.  Call addToCacheTool(context=output_from_scrape_tool) **ONLY** after synthesizeAnswerTool is called. (This runs in the background).
 
 ## Response Guidelines:
 * When you call synthesizeAnswerTool, you MUST formulate a helpful, conversational answer based on the context.
