@@ -1,8 +1,15 @@
-import { rankedSearchResultSchema } from "./google-search";
 import { scraperService } from "../service/scraper.service";
 import { z } from "zod";
 import { createTool } from "@mastra/core/tools";
 import { RankedSearchResult } from "../service/source-scorer.service";
+
+export const rankedSearchResultSchema = z.object({
+  title: z.string(),
+  link: z.string(),
+  snippet: z.string(),
+  score: z.number(),
+  priority: z.enum(["TOP", "DOCS", "COMMUNITY", "BLOG", "OTHER"]),
+});
 
 export const scrapeTool = createTool({
   id: "scrape-tool",
