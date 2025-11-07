@@ -2,17 +2,18 @@ import { createTool } from "@mastra/core/tools";
 import { z } from "zod";
 
 export const synthesizeAnswerTool = createTool({
-  id: "synthesize-answer",
+  id: "synthesize-answer-tool",
   description:
-    "Format response accordingly and send back to the user taking context from either get_cached_answer or search_web_for_context tools",
+    "This is the FINAL tool. Call this to synthesize the user's query and the retrieved context into a final, helpful answer.",
   inputSchema: z.object({
-    output: z.string(),
+    query: z.string().describe("The user's original question."),
+    context: z
+      .string()
+      .describe("The context from the cache OR the web scraper."),
   }),
-  outputSchema: z.object({
-    text: z.string(),
-  }),
+  outputSchema: z.string(),
 
   execute: async ({ context }) => {
-    return { text: context.output };
+    return context.context;
   },
 });

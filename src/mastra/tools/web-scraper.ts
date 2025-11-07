@@ -8,9 +8,13 @@ export const scrapeTool = createTool({
   id: "scrape-tool",
   description:
     "Takes an array of rankedResults **AS IS** from googleSearchTool as an array, scrapes them, and formats them into a single context string to be sent to the user.",
-  inputSchema: z.object({ rankedResults: z.array(rankedSearchResultSchema) }),
+  inputSchema: z.object({
+    rankedResults: z.array(rankedSearchResultSchema),
+    query: z.string(),
+  }),
   outputSchema: z.object({
     output: z.string(),
+    query: z.string(),
   }),
   execute: async ({ context }) => {
     try {
@@ -25,7 +29,7 @@ export const scrapeTool = createTool({
       const scrapedPages = await scraperService.scrape(topResults);
 
       if (!scrapedPages || scrapedPages.length === 0) {
-        return { output: "" };
+        return { output: "", query: context.query };
       }
       const contextString = scrapedPages.map((page, i) => {
         const originalRank = topResults.find((r) => r.link === page.sourceURL);
@@ -41,11 +45,12 @@ CONTENT: ${page.content}
                 `;
       });
 
-      return { output: contextString.join("\n") };
+      return { output: contextString.join("\n"), query: context.query };
     } catch (error) {
       console.log(`Error with scraping: ${error.message}`);
       return {
         output: "Error while scraping the search results",
+        query: context.query,
       };
     }
   },

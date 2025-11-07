@@ -7,12 +7,12 @@ export const addToCacheTool = createTool({
   id: "add-to-cache",
   description: "Add output from search-web-for-context to vector database",
   inputSchema: z.object({
-    text: z.string(),
+    context: z.string(),
   }),
   execute: async ({ context }) => {
     try {
       const { chunks, multipleEmbeddings } = await createMultipleEmbeddings(
-        context.text
+        context.context
       );
 
       console.log("Saving into the database....");
@@ -26,7 +26,7 @@ export const addToCacheTool = createTool({
       });
       console.log("Saved the embeddigns into the database");
     } catch (error) {
-      console.log(`There was an error adding to cache: ${error}`);
+      console.log(`There was an error adding to cache: ${error.message}`);
     }
   },
 });

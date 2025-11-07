@@ -18,19 +18,22 @@ export const googleSearchTool = createTool({
   inputSchema: z.object({
     query: z.string(),
   }),
-  outputSchema: z.object({ rankedResults: z.array(rankedSearchResultSchema) }),
+  outputSchema: z.object({
+    rankedResults: z.array(rankedSearchResultSchema),
+    query: z.string(),
+  }),
   execute: async ({ context }) => {
     try {
       console.log(`Searching for context for ${context.query}`);
       const results = await searchService.search(context.query, 5);
       if (!results || results.length === 0) {
-        return { rankedResults: [] };
+        return { rankedResults: [], query: context.query };
       }
       const rankedResults = sourceScorerService.rankResults(results);
-      return { rankedResults };
+      return { rankedResults, query: context.query };
     } catch (error) {
       console.log(`Search error: ${error.message}`);
-      return { rankedResults: [] };
+      return { rankedResults: [], query: context.query };
     }
   },
 });
